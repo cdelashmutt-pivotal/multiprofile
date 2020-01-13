@@ -1,0 +1,9 @@
+---
+# Default profile
+spring:
+  application:
+    name: multiprofile
+  datasource:
+    url: jdbc:sqlserver://localhost
+    username: sa
+    password: Password#1

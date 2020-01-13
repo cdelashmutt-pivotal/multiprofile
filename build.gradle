@@ -1,0 +1,36 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.vmware.pa'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Not required, just using these to simplify deployment to PAS
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+	// Automatically injects EnvironmentPostProcessors to override DB configs
+	runtimeOnly 'io.pivotal.cfenv:java-cfenv-boot:2.1.0.RELEASE'
+
+	// DB Driver
+	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+
+	// Spring Boot JDBC included just to create a JdbcTemplate
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
